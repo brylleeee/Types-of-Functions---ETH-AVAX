@@ -13,11 +13,16 @@ contract OrphicCoin is ERC20, Ownable {
         _mint (msg. sender, 10 * 1**uint (decimals ()));
     }
 
-    function mint(address to, uint256 amount) public onlyOwner {
-        _mint(to, amount);
+    function mintORPH(uint256 amount) public onlyOwner {
+        _mint(msg.sender, amount);
     }
 
-    function burn(uint256 amount) external {
-        _burn (msg. sender, amount);
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
+        _transfer(msg.sender, recipient, amount);
+        return true;
+    }
+
+    function burnORPH(uint256 amount) public {
+        _burn(msg.sender, amount);
     }
 }
